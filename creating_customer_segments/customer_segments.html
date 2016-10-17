@@ -250,7 +250,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
@@ -264,7 +264,7 @@ div#notebook {
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[7]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[2]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
@@ -1730,9 +1730,9 @@ hRBCCCGEEEKMSiqOQgghhBBCCCFGJRVHIYQQQgghhBCj+v/x/agqF7e01gAAAABJRU5ErkJggg==
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong></p>
-<p>It looks like the first sample represents a rather big retailer: they sell a lot of groceries, milk products and detergents&amp;paper (are in the tail of distribution) and not so much fresh products. This means that they are likely not to use products they order for cooking.</p>
-<p>The second sample may represent a small shop that sells a bit of everything, but has sufficients amount of fresh products as well</p>
-<p>The third sample looks like a cafe or restaurant: they have a lot of fresh products (they are in the very tail of the distribution), quite a lot of frozen products, not much detergents&amp;paper.</p>
+<p>It looks like the first sample represents a rather big retailer. They sell a lot of groceries (for Groceries the amount spent is in the tail of the distribution: it just falls within mean + 2 standard deviations and is almost 2,5 times higher than Q3). Also, they buy a lot of milk products (almost 3 times higher than Q3, just falls within mean + 2 standard deviations) and detergents&amp;paper (2,2 times higher than Q3, 2,8 times higher than the mean). On the contrary, they do not buy much fresh products (the value is just above Q1). It does not look like they use products they buy for cooking.</p>
+<p>The second sample may represent a small shop that sells a bit of everything. Still, quite a lot detergents&amp;paper (the vaue is just under Q3), quite a lot of groceries (the vaue is just under Q3), not so many fresh products (the value is just under Q2).  It does not look like they use products they buy for cooking. Rather for reselling.</p>
+<p>The third sample looks like not a very big cafe or restaurant: they have quite a lot of fresh products (the value is comparable to mean and lies between Q2 and Q3), a lot of frozen products (value falls within  mean + 2 standard deviations and is almost 2,5 times higher than Q3), not much detergents&amp;paper (the value lies between Q1 and Q2 and is quite close to the median). It looks like they use the products for cooking.</p>
 
 </div>
 </div>
@@ -10453,7 +10453,10 @@ rX8D9VH/plg27qsAAAAASUVORK5CYII=
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong></p>
 <p>First and second principal components explain together 72,52% of the variance. First four principal components explain 92,97% of the variance.</p>
-<p>The first dimension is repsenented by Detergents&amp;Paper, Grocery and Milk (all are positive-weighted features). The second dimension is repreented by Fresh, Frozen and Delicatessen (all are positive-weighted). The third dimension has high positive correlation with amount of spending on category Fresh and high negative correlation with amount of spending on Delicatessen. The fourth dimsension is strongly positively influenced by Frozen and strongly negatively influenced by Delicatessen.</p>
+<p>The first dimension is repsenented by Detergents&amp;Paper, Grocery and Milk (all are positive-weighted features). Fresh and Frozen are negatively (but not strongly) correlated. The first dimension may represent a typical retailer.</p>
+<p>The second dimension is repreented by Fresh, Frozen and Delicatessen (all are positive-weighted). May represent a typical restaurant that buys products for cooking.</p>
+<p>The third dimension has high positive correlation with amount of spending on category Fresh and high negative correlation with amount of spending on Delicatessen. It may be a local shop that sells mostly fruits&amp;vegetables.</p>
+<p>The fourth dimsension is strongly positively influenced by Frozen and strongly negatively influenced by Delicatessen. It may be something like a small fish shop that buys frozen fish and recells it later.</p>
 
 </div>
 </div>
@@ -11467,7 +11470,8 @@ TkSuQmCC
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong></p>
-<p>Segment 1 purchases a lot of Groceries and Detergents&amp;Paper, what can represent a retailer. Segment 0 purchases relatively much Fresh products and Frozen products and not that much Groceries and Detergents&amp;Paper, what can respresent a restaurant.</p>
+<p>Segment 1 purchases a lot of Groceries (the value lies just under Q3), Milk (the value lies just under Q3), (Detergents&amp;Paper (the value lies just under Q3), what can represent a retailer.</p>
+<p>Segment 0 purchases relatively much Fresh products (the value is higher than median) and Frozen products (the value is 1.4 times higher than median) and not that much Groceries (the value is close to Q1) and Detergents&amp;Paper (the value is close to Q1), what can respresent a restaurant.</p>
 
 </div>
 </div>
@@ -11591,8 +11595,9 @@ Sample point 2 predicted to be in Cluster 0
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong></p>
-<p>Sample points 0 and 1 are best represented by segment 1; sample point 2 is best represented by segment 0 (the same idea that sample points 0 and 1 are likely to be the retailers and sample point 2 is likely to be a cafe I got in Q1).</p>
-<p>The predictions for each sample are consistent with my observations.</p>
+<p>Sample points 0 and 1 are best represented by segment 1 (amount spent on Groceries lies much closer to the center of segment 1, also amount spent on Detergents&amp;Paper and Milk);</p>
+<p>Sample point 2 is best represented by segment 0 because of low amount spent on Detergents&amp;Paper and Grocery which lie closer to the centers of segment 0 and high amount spent on Fresh which lies closer to the center of segment 0.</p>
+<p>The same idea that sample points 0 and 1 are likely to be the retailers and sample point 2 is likely to be a cafe I got in Q1, so the predictions for each sample are consistent with my observations.</p>
 
 </div>
 </div>
