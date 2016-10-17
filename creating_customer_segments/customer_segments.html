@@ -10453,10 +10453,13 @@ rX8D9VH/plg27qsAAAAASUVORK5CYII=
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong></p>
 <p>First and second principal components explain together 72,52% of the variance. First four principal components explain 92,97% of the variance.</p>
-<p>The first dimension is repsenented by Detergents&amp;Paper, Grocery and Milk (all are positive-weighted features). Fresh and Frozen are negatively (but not strongly) correlated. The first dimension may represent a typical retailer.</p>
-<p>The second dimension is repreented by Fresh, Frozen and Delicatessen (all are positive-weighted). May represent a typical restaurant that buys products for cooking.</p>
-<p>The third dimension has high positive correlation with amount of spending on category Fresh and high negative correlation with amount of spending on Delicatessen. It may be a local shop that sells mostly fruits&amp;vegetables.</p>
-<p>The fourth dimsension is strongly positively influenced by Frozen and strongly negatively influenced by Delicatessen. It may be something like a small fish shop that buys frozen fish and recells it later.</p>
+<p>How principal components are build is nicely explained here: <a href="http://faculty.iiit.ac.in/~mkrishna/PrincipalComponents.pdf">http://faculty.iiit.ac.in/~mkrishna/PrincipalComponents.pdf</a></p>
+<p>Basically, we make a covariance matrix for all our variables (in our case it will be 6x6 matrix), find eigenvalues and eigenvectors. If we choose to select 4 principal components, we will choose for 4 highest eigenvalues and corresponded eigenvectors.</p>
+<p>We will create a transposed eigenvector matrix (it will have 4 rows and 6 columns, the rows are ordered by eigenvalue, started with the highest) and multiply it by corresponded transposed matrix of original data (adjusted by the means). Each row in eigenvector matrix will represent coefficients for variables in each of the components. So for each component we can see whether it is positively or negatively correlated to spending in different categories.</p>
+<p><strong>The first component</strong> is highly positively correlated to spending in categories Milk, Grocery &amp; Detergents_Paper — customers with high values in the first component purchase a lot of these 3 categories, while those with low values in the component purchase very little. So, typical customer that would have a high value in the first component is a typical retailer.</p>
+<p><strong>The second dimension</strong> is represented by Fresh, Frozen and Delicatessen (all are positive-weighted). Typical customer that would have a high value in the second component is  typical restaurant that buys products for cooking.</p>
+<p><strong>The third dimension</strong> has high positive correlation with amount of spending on category Fresh and high negative correlation with amount of spending on Delicatessen. Typical customer that would have high value in the third dimension may be a local shop that sells mostly fruits&amp;vegetables</p>
+<p><strong>The fourth dimsension</strong> is strongly positively correlated to spending in category Frozen and strongly negatively correlated to spending in category Delicatessen. Typical customer that would have high value in the fourth dimension may be something like a small fish shop that buys frozen fish and recells it later.</p>
 
 </div>
 </div>
