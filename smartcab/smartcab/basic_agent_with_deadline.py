@@ -17,7 +17,7 @@ class LearningAgent(Agent):
         self.next_waypoint = None
         self.total_reward = 0
         self.moves = 0
-
+        self.state = None
 
     def reset(self, destination=None):
         self.planner.route_to(destination)
@@ -25,6 +25,7 @@ class LearningAgent(Agent):
         self.next_waypoint = None
         self.total_reward = 0
         self.moves = 0
+        self.state = None
 
     def update(self, t):
         # Gather inputs
@@ -34,10 +35,11 @@ class LearningAgent(Agent):
         location = self.env.agent_states[self]['location']
         destination = self.env.agent_states[self]['destination']
 
-        # TODO: Select action according to your policy
-        action = random.choice(Environment.valid_actions[1:])
-
         # TODO: Update state
+        self.state = (inputs['light'], inputs['oncoming'], inputs['left'], inputs['right'], self.next_waypoint)
+
+        # TODO: Select action according to your policy
+        action = random.choice(Environment.valid_actions)
 
         action_okay = True
         if action == 'right':

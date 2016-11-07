@@ -10,7 +10,12 @@ import os
 class QLearningAgent(Agent):
     """An agent that learns to drive in the smartcab world."""
 
-    def __init__(self, env, epsilon=.1, alpha=.5, gamma=.7, init_q_value = 15):
+    args = []
+    for arg in sys.argv[1:]:
+        args.append(arg)
+    args = [float(x) for x in args]
+
+    def __init__(self, env, epsilon=args[0], alpha=args[1], gamma=args[2], init_q_value = args[3]):
         super(QLearningAgent, self).__init__(env)  # sets self.env = env, state = None, next_waypoint = None, and a default color
         self.color = 'red'  # override color
         self.planner = RoutePlanner(self.env, self)  # simple route planner to get next_waypoint
@@ -124,11 +129,15 @@ def run():
     # NOTE: To quit midway, press Esc or close pygame window, or hit Ctrl+C on the command-line
 
 try:
-    os.remove("reports/first_q_agent_report.txt")
+    os.remove("reports/q_agent_"+str(QLearningAgent(Agent).__dict__.get('epsilon'))+"_" +
+              str(QLearningAgent(Agent).__dict__.get('alpha'))+"_"+str(QLearningAgent(Agent).__dict__.get('gamma'))+"_" +
+              str(QLearningAgent(Agent).__dict__.get('init_q_value'))+".txt")
 except:
     pass
 
-sys.stdout = open("reports/first_q_agent_report.txt","w")
+sys.stdout = open("reports/q_agent_"+str(QLearningAgent(Agent).__dict__.get('epsilon'))+"_" +
+                  str(QLearningAgent(Agent).__dict__.get('alpha'))+"_"+str(QLearningAgent(Agent).__dict__.get('gamma'))+"_" +
+                  str(QLearningAgent(Agent).__dict__.get('init_q_value'))+".txt", "w")
 
 if __name__ == '__main__':
     run()
