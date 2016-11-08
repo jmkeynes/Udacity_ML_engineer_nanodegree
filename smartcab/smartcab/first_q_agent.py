@@ -16,10 +16,13 @@ class QLearningAgent(Agent):
         self.planner = RoutePlanner(self.env, self)  # simple route planner to get next_waypoint
         # TODO: Initialize any additional variables here
         self.next_waypoint = None
+        self.next_next_waypoint = None
         self.total_reward = 0
         self.moves = 0
         self.state = None
         self.new_state = None
+
+        self.penalty = 0
 
         self.init_q_value = init_q_value
         self.epsilon = epsilon  ## probability of doing random move
@@ -33,10 +36,13 @@ class QLearningAgent(Agent):
         self.planner.route_to(destination)
         # TODO: Prepare for a new trip; reset any variables here, if required
         self.next_waypoint = None
+        self.next_next_waypoint = None
         self.total_reward = 0
         self.moves = 0
         self.state = None
         self.new_state = None
+
+        self.penalty = 0
 
     def get_q(self,state,action):
         # if key is not present in dictionary, self.init_q_value is returned
@@ -96,16 +102,21 @@ class QLearningAgent(Agent):
         reward = self.env.act(self, action)
         self.total_reward += reward
         self.moves = self.moves + 1
+        if reward < 0:
+            self.penalty = self.penalty + reward
+        else:
+            self.penalty = self.penalty
 
         # TODO: Learn policy based on state, action, reward
         next_inputs = self.env.sense(self)
-        self.next_state = (next_inputs['light'], next_inputs['oncoming'], next_inputs['left'], next_inputs['right'], self.next_waypoint)
+        self.next_next_waypoint = self.planner.next_waypoint()
+        self.next_state = (next_inputs['light'], next_inputs['oncoming'], next_inputs['left'], next_inputs['right'], self.next_next_waypoint)
         self.q_learn(self.state, action, self.next_state, reward)
 
         ## print out the results
         if (reward > 8) or (deadline == 0):
-            print "LearningAgent.update(): total_reward = {}, total_moves = {}, location = {}, destination = {}".\
-                format(self.total_reward, self.moves, location, destination)  # debug
+            print "LearningAgent.update(): total_reward = {}, total_moves = {}, penalty = {}".\
+                format(self.total_reward, self.moves, self.penalty)  # debug
 
 def run():
     """Run the agent for a finite number of trials."""
@@ -132,5 +143,4 @@ sys.stdout = open("reports/first_q_agent_report.txt","w")
 
 if __name__ == '__main__':
     run()
-
 sys.stdout.close()
